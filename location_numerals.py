@@ -98,16 +98,12 @@ def convert_dupes(alphabet, string):
 		if currentLetter != previousLetter:
 			previousLetter = currentLetter
 		else:
-			currentLetter == previousLetter
 			nextAlphabetIndex = alphabet.index(currentLetter) + 1
 			letters_list.remove(previousLetter)
 			letters_list.remove(currentLetter)
 			letters_list.insert(currentIndex, alphabet[nextAlphabetIndex])
-
-
-
-# 			if currentIndex <= len(string):
-# 				convert_dupes(alphabet, string)
+			newString = "".join(letters_list)
+			return convert_dupes(alphabet, newString)
 
 	
 	
@@ -117,7 +113,8 @@ def convert_dupes(alphabet, string):
 
 if __name__ == '__main__':
 	# Set up letter objects
-	alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+	alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+				"n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 	# 1
 	integers_list = integers_to_keep(87)
