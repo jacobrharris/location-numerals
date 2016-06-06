@@ -1,3 +1,4 @@
+import argparse
 import math
 
 class LocationNumerals:
@@ -114,7 +115,19 @@ class LocationNumerals:
 
 
 if __name__ == '__main__':
+	parser = argparse.ArgumentParser(description="Convert from decimal numbers to location numerals and back.")
+	parser.add_argument('-1', type=int, help="Takes an integer and returns the location numeral in abbreviated form. That is, you pass in 9 and it returns 'ad'.")
+	parser.add_argument('-2', type=str, help="Takes a location numeral and returns its value as an integer. That is, you pass 'ad' in, and it returns 9.")
+	parser.add_argument('-3', type=str, help="Takes a location numeral and returns it in abbreviated form. That is, you pass in 'abbc' and it returns 'ad'.")
+	args = vars(parser.parse_args())
+
 	ln = LocationNumerals()
-	ln.method_one(87)
-	ln.method_two('ad')
-	ln.method_three('abbc')
+
+	if args['1']:
+		ln.method_one(args['1'])
+
+	if args['2']:
+		ln.method_two(args['2'])
+
+	if args['3']:
+		ln.method_three(args['3'])
