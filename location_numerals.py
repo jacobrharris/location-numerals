@@ -67,7 +67,8 @@ def alphabet_to_logs(alphabet):
 		logs_list.append(log)
 	
 	return logs_list
-	
+
+# Convert a string to an integer
 def string_to_integer(alphabet, string):
 	string_list = [letter for letter in string]
 	integers_list = []
@@ -82,6 +83,38 @@ def string_to_integer(alphabet, string):
 	
 	return newInteger
 
+def convert_dupes(alphabet, string):
+	letters_list = [letter for letter in string]
+	letters_list.sort()
+
+	currentIndex = 0
+	previousLetter = ""
+	for currentLetter in letters_list:
+		currentIndex = letters_list.index(currentLetter)
+
+# 		print "Previous: " + previousLetter
+# 		print "Current: " + currentLetter
+
+		if currentLetter != previousLetter:
+			previousLetter = currentLetter
+		else:
+			currentLetter == previousLetter
+			nextAlphabetIndex = alphabet.index(currentLetter) + 1
+			letters_list.remove(previousLetter)
+			letters_list.remove(currentLetter)
+			letters_list.insert(currentIndex, alphabet[nextAlphabetIndex])
+
+
+
+# 			if currentIndex <= len(string):
+# 				convert_dupes(alphabet, string)
+
+	
+	
+	return "".join(letters_list)
+
+
+
 if __name__ == '__main__':
 	# Set up letter objects
 	alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -94,3 +127,7 @@ if __name__ == '__main__':
 	
 	# 2	
 	print string_to_integer(alphabet, 'ad')
+	
+	# 3
+	print convert_dupes(alphabet, 'abbc')
+	
