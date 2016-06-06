@@ -1,130 +1,120 @@
-import argparse
 import math
 
-class Letter:
-	def __init__(self, letter, index):
-		self.letter = letter
-		self.exponent = index
-		self.position = index + 1
-		
-	def __str__(self):
-		return self.letter
-		
-	__repr__ = __str__
+class LocationNumerals:
+	def __init__(self):
+		self.alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
+						 "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
-# List all base integers up to x
-def powers_of_2(x, integer_list=[]):
-	log = math.floor(math.log(x, 2))
-	power_of_2 = int(math.pow(2, log))
+	def method_one(self, integer):
+		integers_list = ln.integers_to_keep(integer)
+		logs_list = ln.integers_to_logs(integers_list)
+		letters_list = ln.logs_to_string(logs_list)
+		print "Method 1: %s" % letters_list
 
-	if power_of_2 == x:
-		if x == 1:
-			integer_list.append(power_of_2)
-			return integer_list
-		else:
-			return powers_of_2(x - 1)
-
-	integer_list.append(power_of_2)
-	return powers_of_2(power_of_2)
-
-# List the base integers that add up to x
-def integers_to_keep(x):
-	integer_list = []
-	all_powers = powers_of_2(x)
-	for power in all_powers:
-		if power + sum(integer_list) <= x:
-			integer_list.append(power)
+	def method_two(self, string):
+		print "Method 2: %s" % ln.string_to_integer(string)
 	
-	integer_list.reverse()
-	return integer_list
+	def method_three(self, string):
+		print "Method 3: %s" % ln.convert_dupes(string)
 
-# Convert integers to their respective logs
-def integers_to_logs(int_list):
-	log_list = []
-	for integer in int_list:
-		if integer == 0:
-			log_list.append(0)
-		else:
-			log = int(math.log(integer, 2))
-			log_list.append(log)
+
+	# List all base integers up to x
+	def powers_of_2(self, x, integer_list=[]):
+		log = math.floor(math.log(x, 2))
+		power_of_2 = int(math.pow(2, log))
+
+		if power_of_2 == x:
+			if x == 1:
+				integer_list.append(power_of_2)
+				return integer_list
+			else:
+				return self.powers_of_2(x - 1)
+
+		integer_list.append(power_of_2)
+		return self.powers_of_2(power_of_2)
+
+	# List the base integers that add up to x
+	def integers_to_keep(self, x):
+		integer_list = []
+		all_powers = self.powers_of_2(x)
+		for power in all_powers:
+			if power + sum(integer_list) <= x:
+				integer_list.append(power)
 	
-	return log_list
+		integer_list.reverse()
+		return integer_list
 
-# Convert logs to their respective letters
-def logs_to_string(alphabet, log_list):
-	letters_list = []
-	for log in log_list:
-		letter = alphabet[log]
-		letters_list.append(letter)
+	# Convert integers to their respective logs
+	def integers_to_logs(self, int_list):
+		log_list = []
+		for integer in int_list:
+			if integer == 0:
+				log_list.append(0)
+			else:
+				log = int(math.log(integer, 2))
+				log_list.append(log)
 	
-	return "".join(letters_list)
+		return log_list
 
-# Convert alphabet to list of logs
-def alphabet_to_logs(alphabet):
-	logs_list = []
-	for letter in alphabet:
-		log = alphabet.index(letter)
-		logs_list.append(log)
+	# Convert logs to their respective letters
+	def logs_to_string(self, log_list):
+		letters_list = []
+		for log in log_list:
+			letter = self.alphabet[log]
+			letters_list.append(letter)
 	
-	return logs_list
+		return "".join(letters_list)
 
-# Convert a string to an integer
-def string_to_integer(alphabet, string):
-	string_list = [letter for letter in string]
-	integers_list = []
-	for letter in string_list:
-		integer = alphabet.index(letter)
-		integers_list.append(integer)
-
-	logs_list = integers_to_logs(integers_list)
-	newInteger = 0
-	for integer in integers_list:
-		newInteger += 2 ** integer 
+	# Convert alphabet to list of logs
+	def alphabet_to_logs(self):
+		logs_list = []
+		for letter in self.alphabet:
+			log = self.alphabet.index(letter)
+			logs_list.append(log)
 	
-	return newInteger
+		return logs_list
 
-def convert_dupes(alphabet, string):
-	letters_list = [letter for letter in string]
-	letters_list.sort()
+	# Convert a string to an integer
+	def string_to_integer(self, string):
+		string_list = [letter for letter in string]
+		integers_list = []
+		for letter in string_list:
+			integer = self.alphabet.index(letter)
+			integers_list.append(integer)
 
-	currentIndex = 0
-	previousLetter = ""
-	for currentLetter in letters_list:
-		currentIndex = letters_list.index(currentLetter)
-
-# 		print "Previous: " + previousLetter
-# 		print "Current: " + currentLetter
-
-		if currentLetter != previousLetter:
-			previousLetter = currentLetter
-		else:
-			nextAlphabetIndex = alphabet.index(currentLetter) + 1
-			letters_list.remove(previousLetter)
-			letters_list.remove(currentLetter)
-			letters_list.insert(currentIndex, alphabet[nextAlphabetIndex])
-			newString = "".join(letters_list)
-			return convert_dupes(alphabet, newString)
-
+		logs_list = self.integers_to_logs(integers_list)
+		newInteger = 0
+		for integer in integers_list:
+			newInteger += 2 ** integer 
 	
+		return newInteger
+
+	# Convert duplicate letters to the next letter
+	def convert_dupes(self, string):
+		letters_list = [letter for letter in string]
+		letters_list.sort()
+
+		currentIndex = 0
+		previousLetter = ""
+		for currentLetter in letters_list:
+			currentIndex = letters_list.index(currentLetter)
+
+			if currentLetter != previousLetter:
+				previousLetter = currentLetter
+			else:
+				nextAlphabetIndex = self.alphabet.index(currentLetter) + 1
+				letters_list.remove(previousLetter)
+				letters_list.remove(currentLetter)
+				letters_list.insert(currentIndex, self.alphabet[nextAlphabetIndex])
+				newString = "".join(letters_list)
+				return self.convert_dupes(newString)
 	
-	return "".join(letters_list)
+		return "".join(letters_list)
 
 
 
 if __name__ == '__main__':
-	# Set up letter objects
-	alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
-				"n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-
-	# 1
-	integers_list = integers_to_keep(87)
-	logs_list = integers_to_logs(integers_list)
-	letters_list = logs_to_string(alphabet, logs_list)
-	print letters_list
-	
-	# 2	
-	print string_to_integer(alphabet, 'ad')
-	
-	# 3
-	print convert_dupes(alphabet, 'abbc')
-	
+	ln = LocationNumerals()
+	ln.method_one(87)
+	ln.method_two('ad')
+	ln.method_three('abbc')
