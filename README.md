@@ -9,4 +9,4 @@ Your mission, should you choose to accept it, is to create a class in whatever p
 This method should handle numbers up to 2^26 (67108864). Bonus points if you aren’t restricted by this limit. Please refer to the wikipedia article linked below for an explanation and overview of how location numerals work: http://en.wikipedia.org/wiki/Location_arithmetic#Location_numerals
 
 # Run
-`python location_numerals.py -1 87 -2 'ad' -3 'abbc'`
+`python location_numerals.py -1 9 -2 'ad' -3 'abbc'`
