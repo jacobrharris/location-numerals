@@ -7,16 +7,16 @@ class LocationNumerals:
 						 "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 	def method_one(self, integer):
-		integers_list = ln.integers_to_keep(integer)
-		logs_list = ln.integers_to_logs(integers_list)
-		letters_list = ln.logs_to_string(logs_list)
+		integers_list = self.integers_to_keep(integer)
+		logs_list = self.integers_to_logs(integers_list)
+		letters_list = self.logs_to_string(logs_list)
 		print "Method 1: %s" % letters_list
 
 	def method_two(self, string):
-		print "Method 2: %s" % ln.string_to_integer(string)
+		print "Method 2: %s" % self.string_to_integer(string)
 	
 	def method_three(self, string):
-		print "Method 3: %s" % ln.convert_dupes(string)
+		print "Method 3: %s" % self.convert_dupes(string)
 
 
 	# List all base integers up to x
